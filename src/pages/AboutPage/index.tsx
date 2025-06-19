@@ -1,10 +1,3 @@
+import {AboutPageAsync} from "./ui/AboutPage.async";
 
-const AboutPage = () => {
-    return (
-        <div>
-            AboutPage
-        </div>
-    );
-};
-
-export default AboutPage;
+export {AboutPageAsync as AboutPage};
