@@ -1,6 +1,8 @@
 import { useTheme } from 'app/providers/ThemeProvider'
 import { AppRouter } from 'app/providers/router'
+import { Suspense } from 'react'
 import { classNames } from 'shared/lib/classNames'
+import { LangSwitcher } from 'widgets/LangSwitcher'
 import { Navbar } from 'widgets/Navbar'
 import './styles/index.scss'
 
@@ -9,9 +11,11 @@ const App = () => {
 
 	return (
 		<div className={classNames('app', {}, [theme])}>
-			<Navbar />
-
-			<AppRouter />
+			<Suspense fallback='loading'>
+				<LangSwitcher />
+				<Navbar />
+				<AppRouter />
+			</Suspense>
 		</div>
 	)
 }
