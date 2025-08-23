@@ -9,6 +9,26 @@ export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 		use: ['@svgr/webpack'],
 	}
 
+	const babelLoader = {
+		test: /\.(js|tsx|jsx)$/,
+		exclude: /node_modules/,
+		use: {
+			loader: 'babel-loader',
+			options: {
+				presets: ['@babel/preset-env'],
+				plugins: [
+					[
+						'i18next-extract',
+						{
+							locales: ['ru', 'en'],
+							keyAsDefaultValue: true,
+						},
+					],
+				],
+			},
+		},
+	}
+
 	const cssLoader = {
 		test: /\.s[ac]ss$/i,
 		use: [
@@ -44,5 +64,5 @@ export function buildLoaders({ isDev }: BuildOptions): RuleSetRule[] {
 	}
 
 	// Порядок возвращаемых лоудер важен, поэтому удобно вынести их в отдельные переменные
-	return [svgrLoader, fileLoader, tpsLoader, cssLoader]
+	return [svgrLoader, fileLoader, babelLoader, tpsLoader, cssLoader]
 }
